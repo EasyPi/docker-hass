@@ -1,0 +1,20 @@
+language: generic
+
+env:
+  - IMG=hass     TAG=latest DIR=.   DOCKERFILE=Dockerfile
+  - IMG=hass     TAG=debian DIR=.   DOCKERFILE=Dockerfile.debian
+  - IMG=hass-arm TAG=latest DIR=arm DOCKERFILE=Dockerfile
+  - IMG=hass-arm TAG=debian DIR=arm DOCKERFILE=Dockerfile.debian
+
+services:
+  - docker
+
+before_install:
+  - docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+script:
+  - docker build -t easypi/$IMG:$TAG -f $DIR/$DOCKERFILE $DIR
+
+after_success:
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker push easypi/$IMG:$TAG

@@ -1,0 +1,7 @@
+hass:
+  image: easypi/hass
+  volumes:
+    - ./data:/etc/hass
+  net: host
+  privileged: true
+  restart: unless-stopped
