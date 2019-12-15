@@ -1,0 +1,65 @@
+#
+# Dockerfile for hass:debian (Home Assistant)
+#
+
+FROM debian:bullseye
+MAINTAINER EasyPi Software Foundation
+
+ARG TARGETARCH
+
+ENV HASS_CLI_VERSION=4.14.0
+ENV HASS_CLI_ARCH=${TARGETARCH:-amd64}
+ENV HASS_CLI_URL=https://github.com/home-assistant/cli/releases/download/${HASS_CLI_VERSION}/ha_${HASS_CLI_ARCH}
+ENV GATT_LIB_VERSION=0.20201113
+
+RUN set -xe \
+    && apt-get update \
+    && apt-get install -y \
+        build-essential \
+        bluez \
+        ca-certificates \
+        cargo \
+        libbluetooth3 \
+        libbluetooth-dev \
+        libboost-python-dev \
+        libboost-thread-dev \
+        libcap2-bin \
+        libglib2.0 \
+        libglib2.0-dev \
+        libssl1.1 \
+        libssl-dev \
+        pkg-config \
+        python-dev \
+        python3-dev \
+        wget \
+    && wget -O- https://bootstrap.pypa.io/get-pip.py | python3 \
+    && mkdir gattlib \
+        && cd gattlib \
+        && pip3 download gattlib==${GATT_LIB_VERSION} \
+        && tar xzf gattlib-${GATT_LIB_VERSION}.tar.gz --strip 1 \
+        && sed -i 's/boost_python-py34/boost_python3/' setup.py \
+        && pip3 install . \
+        && cd .. \
+        && rm -rf gattlib \
+    && pip3 install --no-cache-dir \
+        homeassistant \
+        pybluez \
+    && setcap 'cap_net_raw,cap_net_admin+eip' /usr/bin/python3.9 \
+    && apt-get remove -y \
+        libbluetooth-dev \
+        libboost-python-dev \
+        libboost-thread-dev \
+        libglib2.0-dev \
+        libssl-dev \
+        pkg-config \
+        python-dev
+
+RUN set -xe \
+    && DOWNLOAD_URL=$(echo ${HASS_CLI_URL} | sed -e 's/arm64/aarch64/' -e 's/arm/armv7/') \
+    && wget ${DOWNLOAD_URL} -O /usr/local/bin/ha \
+    && chmod +x /usr/local/bin/ha
+
+VOLUME /etc/hass
+EXPOSE 8123
+
+ENTRYPOINT ["hass", "--config", "/etc/hass"]
