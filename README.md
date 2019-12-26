@@ -2,9 +2,13 @@ home-assistant
 ==============
 
 [![](https://travis-ci.org/EasyPi/docker-hass.svg?branch=master)](https://travis-ci.org/EasyPi/docker-hass)
-[![](https://badge.imagelayers.io/easypi/hass:latest.svg)](https://hub.docker.com/r/easypi/hass)
 
-![](https://home-assistant.io/demo/favicon-192x192.png)
+Image           | Tag    | Size
+----------------|--------|-------
+easypi/hass     | latest | ![](https://images.microbadger.com/badges/image/easypi/hass:latest.svg)
+easypi/hass     | debian | ![](https://images.microbadger.com/badges/image/easypi/hass:debian.svg)
+easypi/hass-arm | latest | ![](https://images.microbadger.com/badges/image/easypi/hass-arm:latest.svg)
+easypi/hass-arm | debian | ![](https://images.microbadger.com/badges/image/easypi/hass-arm:debian.svg)
 
 [Home Assistant][1] is an open-source home automation platform running on
 Python 3. Track and control all devices at home and automate control. Perfect
