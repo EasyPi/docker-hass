@@ -7,6 +7,7 @@ MAINTAINER EasyPi Software Foundation
 
 ARG TARGETARCH
 
+ARG HASS_VERSION=2022.8.3
 ARG HASS_CLI_VERSION=4.18.0
 ARG HASS_CLI_ARCH=${TARGETARCH:-amd64}
 ARG HASS_CLI_URL=https://github.com/home-assistant/cli/releases/download/${HASS_CLI_VERSION}/ha_${HASS_CLI_ARCH}
@@ -23,7 +24,7 @@ RUN set -xe \
         python3 \
         python3-dev \
         py3-pip \
-    && pip3 install --no-cache-dir homeassistant
+    && pip3 install --no-cache-dir homeassistant==${HASS_VERSION}
 
 RUN set -xe \
     && DOWNLOAD_URL=$(echo ${HASS_CLI_URL} | sed -e 's/arm64/aarch64/' -e 's/arm/armv7/') \

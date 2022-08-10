@@ -1,12 +1,12 @@
-home-assistant
-==============
+home-assistant (HASS)
+=====================
 
 ![](https://github.com/easypi/docker-hass/actions/workflows/build.yaml/badge.svg)
 
-Image           | Tag    | Size
-----------------|--------|-------
-easypi/hass     | latest | ![](https://images.microbadger.com/badges/image/easypi/hass:latest.svg)
-easypi/hass     | debian | ![](https://images.microbadger.com/badges/image/easypi/hass:debian.svg)
+Image       | Tag    | Size
+------------|--------|----------
+easypi/hass | latest | 473.55 MB
+easypi/hass | debian | 464.32 MB
 
 [Home Assistant][1] is an open-source home automation platform running on
 Python 3. Track and control all devices at home and automate control. Perfect
