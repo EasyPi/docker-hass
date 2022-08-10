@@ -34,6 +34,7 @@ RUN set -xe \
         python3-dev \
         wget \
     && wget -O- https://bootstrap.pypa.io/get-pip.py | python3 \
+    && pip3 install setuptools==57.5.0 \
     && mkdir gattlib \
         && cd gattlib \
         && pip3 download gattlib==${GATT_LIB_VERSION} \
