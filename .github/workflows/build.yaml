@@ -1,9 +1,12 @@
 name: Docker Build Images
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
+    paths-ignore:
+      - README.md
 
 env:
   IMAGE_NAME: 'easypi/hass'
