@@ -7,9 +7,9 @@ MAINTAINER EasyPi Software Foundation
 
 ARG TARGETARCH
 
-ENV HASS_CLI_VERSION=4.14.0
-ENV HASS_CLI_ARCH=${TARGETARCH:-amd64}
-ENV HASS_CLI_URL=https://github.com/home-assistant/cli/releases/download/${HASS_CLI_VERSION}/ha_${HASS_CLI_ARCH}
+ARG HASS_CLI_VERSION=4.18.0
+ARG HASS_CLI_ARCH=${TARGETARCH:-amd64}
+ARG HASS_CLI_URL=https://github.com/home-assistant/cli/releases/download/${HASS_CLI_VERSION}/ha_${HASS_CLI_ARCH}
 
 RUN set -xe \
     && apk update \
