@@ -10,7 +10,7 @@ on:
 
 env:
   IMAGE_NAME: 'easypi/hass'
-  HASS_VERSION: '2022.8.3'
+  HASS_VERSION: '2022.8.6'
 
 jobs:
   release:
